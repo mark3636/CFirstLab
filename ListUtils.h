@@ -8,7 +8,7 @@
 #include <vector>
 #include <algorithm>
 
-//Нахождение минимального элемента в списке
+//find minimal element in list
 int getMin(std::list<int> lst) {
 	if (lst.empty()) {
 		throw "ListIsEmpty";
@@ -22,7 +22,7 @@ int getMin(std::list<int> lst) {
 	return min;
 }
 
-//Нахождение минимального элемента в списке
+//find minimal element in list using iterators
 int getItMin(std::list<int>::iterator begin, std::list<int>::iterator end) {
 	int min = *begin;
 	for (auto it = begin; it != end; ++it) {
@@ -31,7 +31,7 @@ int getItMin(std::list<int>::iterator begin, std::list<int>::iterator end) {
 	return min;
 }
 
-//Сумма элементов списка
+//find sum of elements
 int listSum(std::list<int> lst) {
 	if (lst.empty()) {
 		throw "ListIsEmpty";
@@ -43,7 +43,7 @@ int listSum(std::list<int> lst) {
 	return sum;
 }
 
-//Среднее арифметическое списка
+//find average 
 double listAverage(std::list<int> lst) {
 	try {
 		int sum = listSum(lst);
