@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <iostream>
 #include <list>
@@ -8,7 +8,7 @@
 #include <vector>
 #include <algorithm>
 
-//find minimal element in list
+//Минимальный элемент в списке
 int getMin(std::list<int> lst) {
 	if (lst.empty()) {
 		throw "ListIsEmpty";
@@ -22,7 +22,7 @@ int getMin(std::list<int> lst) {
 	return min;
 }
 
-//find minimal element in list using iterators
+//Минимальный элемент в списке используюя итераторы
 int getItMin(std::list<int>::iterator begin, std::list<int>::iterator end) {
 	int min = *begin;
 	for (auto it = begin; it != end; ++it) {
@@ -31,7 +31,7 @@ int getItMin(std::list<int>::iterator begin, std::list<int>::iterator end) {
 	return min;
 }
 
-//find sum of elements
+//Сумма элементов списка
 int listSum(std::list<int> lst) {
 	if (lst.empty()) {
 		throw "ListIsEmpty";
@@ -43,7 +43,7 @@ int listSum(std::list<int> lst) {
 	return sum;
 }
 
-//find average 
+//Среднее арифметическое списка
 double listAverage(std::list<int> lst) {
 	try {
 		int sum = listSum(lst);
@@ -74,6 +74,7 @@ public:
 	}
 };
 
+//Заполнение файла случайными числами(цикличное)
 std::fstream randomCycleFilling(std::string fileName, int N, int M) {
 	srand(time(NULL));
 	std::fstream fout(fileName, std::ios::out);
@@ -84,6 +85,7 @@ std::fstream randomCycleFilling(std::string fileName, int N, int M) {
 	return fout;
 }
 
+//Заполнение файла случайными числами(generate(rand))
 std::fstream randomGenerateFilling(std::string fileName, int N, int M) {
 	std::vector<int> v(N);
 	std::fstream fout(fileName, std::ios::out);
@@ -95,6 +97,7 @@ std::fstream randomGenerateFilling(std::string fileName, int N, int M) {
 	return fout;
 }
 
+//Получение списка из файла
 std::list<int> listFromFile(std::string fileName) {
 	std::fstream fin(fileName, std::ios::in);
 	std::list<int> lst;
@@ -107,6 +110,7 @@ std::list<int> listFromFile(std::string fileName) {
 	return lst;
 }
 
+//modify
 std::list<int> modify(std::list<int> lst) {
 	try {
 		int min = getMin(lst);
@@ -120,6 +124,7 @@ std::list<int> modify(std::list<int> lst) {
 	}
 }
 
+//modify с итераторами
 std::list<int> modify(std::list<int>::iterator begin, std::list<int>::iterator end)
 {
 	std::list<int> result;
@@ -136,6 +141,7 @@ std::list<int> modify(std::list<int>::iterator begin, std::list<int>::iterator e
 	}
 }
 
+//modify с transform
 std::list<int> transformModify(std::list<int> lst) {
 	try {
 		int min = getMin(lst);
@@ -150,6 +156,7 @@ std::list<int> transformModify(std::list<int> lst) {
 	}
 }
 
+//modify с foreach
 std::list<int> foreachModify(std::list<int> lst) {
 	try {
 		int min = getMin(lst);
@@ -162,6 +169,7 @@ std::list<int> foreachModify(std::list<int> lst) {
 	}
 }
 
+//Вывод списка в консоль
 void listToConsole(std::list<int> lst) {
 	for (int x : lst) {
 		std::cout << " " << x;
@@ -169,6 +177,7 @@ void listToConsole(std::list<int> lst) {
 	std::cout << std::endl;
 }
 
+//Вывод списка в файл
 void listTofile(std::list<int> lst, std::string fileName) {
 	std::fstream fout(fileName, std::ios::out);
 	for (int x : lst) {

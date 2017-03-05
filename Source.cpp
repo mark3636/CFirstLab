@@ -1,6 +1,8 @@
-//13. Заменить все положительные числа квадратом минимального числа.
+п»ї//Р›СѓРєРёРЅ РњР°СЂРє
+//13(РЎ). Р—Р°РјРµРЅРёС‚СЊ РІСЃРµ РїРѕР»РѕР¶РёС‚РµР»СЊРЅС‹Рµ С‡РёСЃР»Р° РєРІР°РґСЂР°С‚РѕРј РјРёРЅРёРјР°Р»СЊРЅРѕРіРѕ С‡РёСЃР»Р°(std::list).
 #include "ListUtils.h"
 
+//РџРµС‡Р°С‚СЊ РјРµРЅСЋ
 void printMenu() {
 	std::cout << " 1)Fill file with random numbers" << std::endl;
 	std::cout << " 2)Input" << std::endl;
@@ -15,6 +17,7 @@ void printMenu() {
 	std::cout << "Enter the command: ";
 }
 
+//РџРѕР»СѓС‡РµРЅРёРµ РёРјРµРЅРё С„Р°Р№Р»Р°
 std::string getFileName() {
 	std::string fileName;
 	std::cout << "Enter file name: ";
