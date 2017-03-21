@@ -103,10 +103,15 @@ std::list<int> listFromFile(std::string fileName) {
 	std::list<int> lst;
 	int el;
 
-	while (fin >> el) {
-		lst.push_back(el);
+	if (fin.is_open()) {
+		while (fin >> el) {
+			lst.push_back(el);
+		}
+		fin.close();
 	}
-	fin.close();
+	else {
+		std::cout << "File doesn't exist" << std::endl;
+	}
 	return lst;
 }
 
@@ -172,7 +177,7 @@ std::list<int> foreachModify(std::list<int> lst) {
 //Вывод списка в консоль
 void listToConsole(std::list<int> lst) {
 	for (int x : lst) {
-		std::cout << " " << x;
+		std::cout << " -> " << x;
 	}
 	std::cout << std::endl;
 }
@@ -180,8 +185,13 @@ void listToConsole(std::list<int> lst) {
 //Вывод списка в файл
 void listTofile(std::list<int> lst, std::string fileName) {
 	std::fstream fout(fileName, std::ios::out);
-	for (int x : lst) {
-		fout << x << std::endl;
+	if (fout.is_open()) {
+		for (int x : lst) {
+			fout << x << std::endl;
+		}
+		fout.close();
 	}
-	fout.close();
+	else {
+		std::cout << "Can't open file " << fileName;
+	}
 }
