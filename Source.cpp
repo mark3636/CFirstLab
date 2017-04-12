@@ -15,7 +15,7 @@ void printMenu() {
 	std::cout << " 9)Output to console" << std::endl;
 	std::cout << " 10)Output to file" << std::endl;
 	std::cout << " 0)Exit" << std::endl;
-	std::cout << "Enter the command: ";
+	std::cout << " >> ";
 }
 
 //Получение имени файла
@@ -33,6 +33,9 @@ int main() {
 	std::string fileName;
 	std::string str;
 	int choice;
+	int o;
+	auto begin = lst.begin();
+	auto end = lst.begin();
 
 	while (true) {
 		printMenu();
@@ -42,13 +45,31 @@ int main() {
 			switch (choice) {
 			case 1:
 				int N, M;
+				o = 0;
 				fileName = getFileName();
 				std::cout << "Enter count: ";
 				std::cin >> N;
 				std::cout << "Enter range: ";
 				std::cin >> M;
-				randomCycleFilling(fileName, N, M);
-				randomGenerateFilling(fileName, N, M);
+				while ((o < 1) || (o > 3))
+				{
+					std::cout << " 1)CycleFilling\n";
+					std::cout << " 2)GenerateFilling\n";
+					std::cout << " 3)Cancel\n";
+					std::cout << " >> ";
+					std::cin >> o;
+				}
+				switch (o)
+				{
+				case 1:
+					randomCycleFilling(fileName, N, M);
+					break;
+				case 2:
+					randomGenerateFilling(fileName, N, M);
+					break;
+				case 3:
+					break;
+				}
 				break;
 			case 2:
 				fileName = getFileName();
@@ -66,10 +87,44 @@ int main() {
 				}
 				break;
 			case 4:
+				int a , b;
+				a = b = o = 0;
 				if (!lst.empty()) {
 					listToConsole(lst);
-					lst = modify(lst.begin(), lst.end());
-					listToConsole(lst);
+					while ((o < 1) || (o > 3))
+					{
+						std::cout << " 1)[list.begin(), list.end())\n";
+						std::cout << " 2)[a, b)\n";
+						std::cout << " 3)Cancel\n";
+						std::cout << " >> ";
+						std::cin >> o;
+					}
+					switch (o)
+					{
+					case 1:
+						lst = modify(lst.begin(), lst.end());
+						listToConsole(lst);
+						break;
+					case 2:
+						std::cout << "a: ";
+						std::cin >> a;
+						std::cout << "b: ";
+						std::cin >> b;
+						
+						begin = lst.begin();
+						end = lst.begin();
+
+						std::advance(begin, a);
+						std::advance(end, b);
+
+						lst = modify(begin, end);
+
+						listToConsole(lst);
+						break;
+					case 3:
+						break;
+					}
+					
 				}
 				else {
 					std::cout << "List is empty!" << std::endl;
@@ -96,12 +151,22 @@ int main() {
 				}
 				break;
 			case 7:
-				std::cout << "Sum of list = " << listSum(lst) << std::endl;
+				try {
+					std::cout << "Sum of list = " << listSum(lst) << std::endl;
+				}
+				catch (const char* str) {
+					std::cout << str << std::endl;
+				}
 				break;
 			case 8:
-				std::cout << "Average of list = " << listAverage(lst) << std::endl;
+				try {
+					std::cout << "Average of list = " << listAverage(lst) << std::endl;
+				}
+				catch (const char* str) {
+					std::cout << str << std::endl;
+				}
 				break;
-			case 9:
+			case 10:
 				if (!lst.empty()) {
 					fileName = getFileName();
 					listTofile(lst, fileName);
@@ -110,13 +175,14 @@ int main() {
 					std::cout << "List is empty!" << std::endl;
 				}
 				break;
-			case 10:
+			case 9:
 				if (!lst.empty()) {
 					listToConsole(lst);
 				}
 				else {
 					std::cout << "List is empty!" << std::endl;
 				}
+				break;
 			case 0:
 				return 0;
 				break;

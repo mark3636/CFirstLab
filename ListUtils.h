@@ -33,14 +33,14 @@ int getItMin(std::list<int>::iterator begin, std::list<int>::iterator end) {
 
 //Сумма элементов списка
 int listSum(std::list<int> lst) {
-	if (lst.empty()) {
-		throw "ListIsEmpty";
-	}
-	int sum = 0;
-	for (int el : lst) {
-		sum += el;
-	}
-	return sum;
+		if (lst.empty()) {
+			throw "ListIsEmpty";
+		}
+		int sum = 0;
+		for (int el : lst) {
+			sum += el;
+		}
+		return sum;
 }
 
 //Среднее арифметическое списка
@@ -49,8 +49,8 @@ double listAverage(std::list<int> lst) {
 		int sum = listSum(lst);
 		return (double)sum / lst.size();
 	}
-	catch (std::string str) {
-		std::cout << str << std::endl;
+	catch (const char* str) {
+		throw str;
 	}
 }
 
@@ -58,7 +58,7 @@ class Transform {
 private:
 	int min;
 public:
-	Transform(const int& value) :min(value) {}
+	Transform(int value) :min(value*value) {}
 	int operator() (int& elem) const {
 		return (elem > 0 ? min : elem);
 	}
@@ -68,7 +68,7 @@ class Foreach {
 private:
 	int min;
 public:
-	Foreach(const int& value) :min(value) {}
+	Foreach(int value) :min(value*value) {}
 	void operator() (int& elem) {
 		if (elem > 0) elem = min;
 	}
@@ -119,12 +119,13 @@ std::list<int> listFromFile(std::string fileName) {
 std::list<int> modify(std::list<int> lst) {
 	try {
 		int min = getMin(lst);
+		int minsq = min * min;
 		for (auto it = lst.begin(); it != lst.end(); ++it) {
-			if (*it > 0) *it = min;
+			if (*it > 0) *it = minsq;
 		}
 		return lst;
 	}
-	catch (std::string str) {
+	catch (const char* str) {
 		std::cout << str << std::endl;
 	}
 }
@@ -135,12 +136,13 @@ std::list<int> modify(std::list<int>::iterator begin, std::list<int>::iterator e
 	std::list<int> result;
 	try {
 		int min = getItMin(begin, end);
+		int minsq = min*min;
 		for (auto it = begin; it != end; it++) {
-			result.push_back(*it > 0 ? min : *it);
+			result.push_back(*it > 0 ? minsq : *it);
 		}
 		return result;
 	}
-	catch (std::string e) {
+	catch (const char* e) {
 		std::cout << e << std::endl;
 		return result;
 	}
@@ -155,7 +157,7 @@ std::list<int> transformModify(std::list<int> lst) {
 		std::transform(lst.begin(), lst.end(), result.begin(), Transform(min));
 		return result;
 	}
-	catch (std::string e) {
+	catch (const char* e) {
 		std::cout << e << std::endl;
 		return lst;
 	}
@@ -168,7 +170,7 @@ std::list<int> foreachModify(std::list<int> lst) {
 		std::for_each(lst.begin(), lst.end(), Foreach(min));
 		return lst;
 	}
-	catch (std::string e) {
+	catch (const char* e) {
 		std::cout << e << std::endl;
 		return lst;
 	}
