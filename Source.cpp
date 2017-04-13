@@ -21,7 +21,7 @@ void printMenu() {
 //Получение имени файла
 std::string getFileName() {
 	std::string fileName;
-	std::cout << "Enter file name: ";
+	std::cout << "\n Enter file name: ";
 	std::getline(std::cin, fileName);
 	std::getline(std::cin, fileName);
 	if (fileName == "") fileName = "default";
@@ -90,19 +90,17 @@ int main() {
 				int a , b;
 				a = b = o = 0;
 				if (!lst.empty()) {
-					listToConsole(lst);
-					while ((o < 1) || (o > 3))
-					{
+					while ((o < 1) || (o > 3)) {
 						std::cout << " 1)[list.begin(), list.end())\n";
 						std::cout << " 2)[a, b)\n";
 						std::cout << " 3)Cancel\n";
 						std::cout << " >> ";
 						std::cin >> o;
 					}
-					switch (o)
-					{
+					switch (o) {
 					case 1:
-						lst = modify(lst.begin(), lst.end());
+						listToConsole(lst);
+						modify(lst.begin(), lst.end());
 						listToConsole(lst);
 						break;
 					case 2:
@@ -111,15 +109,22 @@ int main() {
 						std::cout << "b: ";
 						std::cin >> b;
 						
-						begin = lst.begin();
-						end = lst.begin();
+						if (a >= b || b < 0 || a < 0) {
+							std::cout << " Wrong range!\n";
+						}
+						else {
+							begin = lst.begin();
+							end = lst.begin();
 
-						std::advance(begin, a);
-						std::advance(end, b);
+							std::advance(begin, a);
+							std::advance(end, b);
 
-						lst = modify(begin, end);
+							listToConsole(lst);
 
-						listToConsole(lst);
+							modify(begin, end);
+
+							listToConsole(lst);
+						}
 						break;
 					case 3:
 						break;
@@ -147,7 +152,7 @@ int main() {
 					listToConsole(lst);
 				}
 				else {
-					std::cout << "List is empty!" << std::endl;
+					std::cout << "\n List is empty!\n" << std::endl;
 				}
 				break;
 			case 7:
@@ -172,7 +177,7 @@ int main() {
 					listTofile(lst, fileName);
 				}
 				else {
-					std::cout << "List is empty!" << std::endl;
+					std::cout << "\n List is empty!\n" << std::endl;
 				}
 				break;
 			case 9:
@@ -180,19 +185,19 @@ int main() {
 					listToConsole(lst);
 				}
 				else {
-					std::cout << "List is empty!" << std::endl;
+					std::cout << "\n List is empty!\n" << std::endl;
 				}
 				break;
 			case 0:
 				return 0;
 				break;
 			default:
-				std::cout << "Wrong command!" << std::endl;
+				std::cout << "\n Wrong command!\n" << std::endl;
 				break;
 			}
 		}
 		catch (std::exception& e) {
-			std::cout << "Wrong command!" << std::endl;
+			std::cout << "\n Wrong command!\n" << std::endl;
 		}
 	}
 }

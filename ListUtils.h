@@ -11,7 +11,7 @@
 //Минимальный элемент в списке
 int getMin(std::list<int> lst) {
 	if (lst.empty()) {
-		throw "ListIsEmpty";
+		throw "\n ListIsEmpty!\n";
 	}
 	int min = lst.front();
 	for (int el : lst) {
@@ -34,7 +34,7 @@ int getItMin(std::list<int>::iterator begin, std::list<int>::iterator end) {
 //Сумма элементов списка
 int listSum(std::list<int> lst) {
 		if (lst.empty()) {
-			throw "ListIsEmpty";
+			throw "\n ListIsEmpty!\n";
 		}
 		int sum = 0;
 		for (int el : lst) {
@@ -110,7 +110,7 @@ std::list<int> listFromFile(std::string fileName) {
 		fin.close();
 	}
 	else {
-		std::cout << "File doesn't exist" << std::endl;
+		std::cout << "\n File doesn't exist!\n" << std::endl;
 	}
 	return lst;
 }
@@ -131,20 +131,17 @@ std::list<int> modify(std::list<int> lst) {
 }
 
 //modify с итераторами
-std::list<int> modify(std::list<int>::iterator begin, std::list<int>::iterator end)
+void modify(std::list<int>::iterator begin, std::list<int>::iterator end)
 {
-	std::list<int> result;
 	try {
 		int min = getItMin(begin, end);
 		int minsq = min*min;
-		for (auto it = begin; it != end; it++) {
-			result.push_back(*it > 0 ? minsq : *it);
+		for (auto it = begin; it != end; ++it) {
+			*it = *it > 0 ? minsq : *it;
 		}
-		return result;
 	}
 	catch (const char* e) {
 		std::cout << e << std::endl;
-		return result;
 	}
 }
 
@@ -178,9 +175,11 @@ std::list<int> foreachModify(std::list<int> lst) {
 
 //Вывод списка в консоль
 void listToConsole(std::list<int> lst) {
+	std::cout << std::endl;
 	for (int x : lst) {
 		std::cout << " -> " << x;
 	}
+	std::cout << std::endl;
 	std::cout << std::endl;
 }
 
@@ -194,6 +193,6 @@ void listTofile(std::list<int> lst, std::string fileName) {
 		fout.close();
 	}
 	else {
-		std::cout << "Can't open file " << fileName;
+		std::cout << "\n Can't open file!\n" << fileName;
 	}
 }
